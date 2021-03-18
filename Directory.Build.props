@@ -1,0 +1,8 @@
+<Project>
+    <PropertyGroup>
+        <LangVersion>9</LangVersion>
+        <Nullable>enable</Nullable>
+        <AssemblyOriginatorKeyFile>..\..\Enhanced.ComponentModel.snk</AssemblyOriginatorKeyFile>
+        <SignAssembly>true</SignAssembly>
+    </PropertyGroup>
+</Project>
