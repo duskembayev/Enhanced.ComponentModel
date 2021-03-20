@@ -8,13 +8,17 @@ namespace Enhanced.ComponentModel.Benchmarks
     [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
     public class EnhancedObjectBenchmarks
     {
-        private const string Value1 = "Value1";
-        private const string Value2 = "Value2";
+        private const string StrValue1 = "Value1";
+        private const string StrValue2 = "Value2";
+        private const int IntValue1 = 26;
+        private const int IntValue2 = 72;
 
         private readonly object _sampleEnhancedObject;
-        private readonly PropertyDescriptor _sampleEnhancedPropertyDescriptor;
+        private readonly PropertyDescriptor _sampleEnhancedStrPropertyDescriptor;
+        private readonly PropertyDescriptor _sampleEnhancedIntPropertyDescriptor;
         private readonly object _sampleRegularObject;
-        private readonly PropertyDescriptor _sampleRegularPropertyDescriptor;
+        private readonly PropertyDescriptor _sampleRegularStrPropertyDescriptor;
+        private readonly PropertyDescriptor _sampleRegularIntPropertyDescriptor;
 
         public EnhancedObjectBenchmarks()
         {
@@ -24,70 +28,108 @@ namespace Enhanced.ComponentModel.Benchmarks
 
             _sampleEnhancedObject = new SampleEnhancedObject
             {
-                Value = Value1
+                StrValue = StrValue1,
+                IntValue = IntValue1,
             };
 
-            _sampleEnhancedPropertyDescriptor = sampleEnhancedTypeDescriptionProvider
-                    .GetTypeDescriptor(_sampleEnhancedObject)!
+            _sampleEnhancedStrPropertyDescriptor = sampleEnhancedTypeDescriptionProvider.GetTypeDescriptor(_sampleEnhancedObject)!
                 .GetProperties()
-                .Find(nameof(SampleEnhancedObject.Value), false);
+                .Find(nameof(SampleEnhancedObject.StrValue), false);
+
+            _sampleEnhancedIntPropertyDescriptor = sampleEnhancedTypeDescriptionProvider.GetTypeDescriptor(_sampleEnhancedObject)!
+                .GetProperties()
+                .Find(nameof(SampleEnhancedObject.IntValue), false);
 
             _sampleRegularObject = new SampleRegularObject
             {
-                Value = Value1
+                StrValue = StrValue1,
+                IntValue = IntValue1,
             };
 
-            _sampleRegularPropertyDescriptor = TypeDescriptor
+            _sampleRegularStrPropertyDescriptor = TypeDescriptor
                 .GetProperties(_sampleRegularObject)
-                .Find(nameof(SampleRegularObject.Value), false);
+                .Find(nameof(SampleRegularObject.StrValue), false);
+
+            _sampleRegularIntPropertyDescriptor = TypeDescriptor
+                .GetProperties(_sampleRegularObject)
+                .Find(nameof(SampleRegularObject.IntValue), false);
         }
 
         [Benchmark(Baseline = true)]
-        [BenchmarkCategory("GetValue")]
-        public object? RegularGetValue()
+        [BenchmarkCategory("GetValue_String")]
+        public object? Regular_GetValue_String()
         {
-            return _sampleRegularPropertyDescriptor.GetValue(_sampleRegularObject);
+            return _sampleRegularStrPropertyDescriptor.GetValue(_sampleRegularObject);
         }
 
         [Benchmark(Baseline = true)]
-        [BenchmarkCategory("SetValue")]
-        public void RegularSetValue()
+        [BenchmarkCategory("SetValue_String")]
+        public void Regular_SetValue_String()
         {
-            _sampleRegularPropertyDescriptor.SetValue(_sampleRegularObject, Value2);
+            _sampleRegularStrPropertyDescriptor.SetValue(_sampleRegularObject, StrValue2);
+        }
+
+        [Benchmark(Baseline = true)]
+        [BenchmarkCategory("GetValue_Int")]
+        public object? Regular_GetValue_Int()
+        {
+            return _sampleRegularIntPropertyDescriptor.GetValue(_sampleRegularObject);
+        }
+
+        [Benchmark(Baseline = true)]
+        [BenchmarkCategory("SetValue_Int")]
+        public void Regular_SetValue_Int()
+        {
+            _sampleRegularIntPropertyDescriptor.SetValue(_sampleRegularObject, IntValue2);
         }
 
         [Benchmark]
-        [BenchmarkCategory("GetValue")]
-        public object? EnhancedGetValue()
+        [BenchmarkCategory("GetValue_String")]
+        public object? Enhanced_GetValue_String()
         {
-            return _sampleEnhancedPropertyDescriptor.GetValue(_sampleEnhancedObject);
+            return _sampleEnhancedStrPropertyDescriptor.GetValue(_sampleEnhancedObject);
         }
 
         [Benchmark]
-        [BenchmarkCategory("SetValue")]
-        public void EnhancedSetValue()
+        [BenchmarkCategory("SetValue_String")]
+        public void Enhanced_SetValue_String()
         {
-            _sampleEnhancedPropertyDescriptor.SetValue(_sampleEnhancedObject, Value2);
+            _sampleEnhancedStrPropertyDescriptor.SetValue(_sampleEnhancedObject, StrValue2);
+        }
+
+        [Benchmark]
+        [BenchmarkCategory("GetValue_Int")]
+        public object? Enhanced_GetValue_Int()
+        {
+            return _sampleEnhancedIntPropertyDescriptor.GetValue(_sampleEnhancedObject);
+        }
+
+        [Benchmark]
+        [BenchmarkCategory("SetValue_Int")]
+        public void Enhanced_SetValue_Int()
+        {
+            _sampleEnhancedIntPropertyDescriptor.SetValue(_sampleEnhancedObject, IntValue2);
         }
 
         private class SampleRegularObject
         {
-            public string Value { get; set; }
+            public string StrValue { get; set; }
+            public int IntValue { get; set; }
         }
 
-        public class SampleEnhancedObject : EnhancedObject
+        private class SampleEnhancedObject : EnhancedObject
         {
-            public string Value { get; set; }
+            public string StrValue { get; set; }
+            public int IntValue { get; set; }
         }
 
-        public class SampleEnhancedObjectContainer : EnhancedTypeDescriptionContainer
+        private class SampleEnhancedObjectContainer : EnhancedTypeDescriptionContainer
         {
             protected override void OnRegister()
             {
                 Register<SampleEnhancedObject>(typeof(SampleEnhancedObject).FullName!)
-                    .AddProperty<string>(nameof(SampleEnhancedObject.Value))
-                    .AddGetter(s => s.Value)
-                    .AddSetter((s, val) => s.Value = val);
+                    .AddProperty(nameof(SampleEnhancedObject.StrValue), s => s.StrValue, (s, val) => s.StrValue = val)
+                    .AddProperty(nameof(SampleEnhancedObject.IntValue), s => s.IntValue, (s, val) => s.IntValue = val);
             }
         }
     }

@@ -1,4 +1,6 @@
-﻿namespace Enhanced.ComponentModel.Builders
+﻿using System;
+
+namespace Enhanced.ComponentModel.Builders
 {
     public interface IEnhancedTypeDescriptorBuilder
     {
@@ -7,6 +9,9 @@
 
     public interface IEnhancedTypeDescriptorBuilder<T> : IEnhancedTypeDescriptorBuilder
     {
-        IEnhancedPropertyDescriptorBuilder<T, TProperty> AddProperty<TProperty>(string propertyName);
+        IEnhancedTypeDescriptorBuilder<T> AddProperty<TProperty>(
+            string propertyName,
+            Func<T, TProperty>? getter = null,
+            Action<T, TProperty>? setter = null);
     }
 }
