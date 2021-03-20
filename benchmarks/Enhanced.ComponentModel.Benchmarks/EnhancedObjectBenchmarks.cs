@@ -18,18 +18,18 @@ namespace Enhanced.ComponentModel.Benchmarks
 
         public EnhancedObjectBenchmarks()
         {
-            EnhancedTypeDescriptionProvider.CreateBuilder()
+            var sampleEnhancedTypeDescriptionProvider = EnhancedTypeDescriptionProvider.CreateBuilder()
                 .RegisterContainer(typeof(SampleEnhancedObjectContainer))
-                .Build()
-                .Apply();
+                .Build();
 
             _sampleEnhancedObject = new SampleEnhancedObject
             {
                 Value = Value1
             };
 
-            _sampleEnhancedPropertyDescriptor = TypeDescriptor
-                .GetProperties(_sampleEnhancedObject)
+            _sampleEnhancedPropertyDescriptor = sampleEnhancedTypeDescriptionProvider
+                    .GetTypeDescriptor(_sampleEnhancedObject)!
+                .GetProperties()
                 .Find(nameof(SampleEnhancedObject.Value), false);
 
             _sampleRegularObject = new SampleRegularObject
