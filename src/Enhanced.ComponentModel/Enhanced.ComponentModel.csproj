@@ -1,9 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <AssemblyOriginatorKeyFile>..\..\Enhanced.ComponentModel.snk</AssemblyOriginatorKeyFile>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <AssemblyOriginatorKeyFile>..\..\Enhanced.ComponentModel.snk</AssemblyOriginatorKeyFile>
+        <SignAssembly>true</SignAssembly>
+        <Authors>duskembayev</Authors>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/duskembayev/Enhanced.ComponentModel</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/duskembayev/Enhanced.ComponentModel</PackageProjectUrl>
+        <PackageTags>typedescriptor, propertydescriptor, wpf, binding, mvvm, icustomtypedescriptor</PackageTags>
+        <PackageIcon>icons/icon.png</PackageIcon>
+        <PackageDescription>Provides ICustomTypeDescriptor implementation with improved performance based on code generation and expressions.</PackageDescription>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Update="icon.png" Pack="true" PackagePath="icons" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\Enhanced.ComponentModel.CodeGeneration\bin\$(Configuration)\netstandard2.0\Enhanced.ComponentModel.CodeGeneration.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    </ItemGroup>
 
 </Project>

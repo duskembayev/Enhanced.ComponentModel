@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using System.Runtime.Loader;
 using Enhanced.ComponentModel.Attributes;
+using Enhanced.ComponentModel.Exceptions;
 
 namespace Enhanced.ComponentModel
 {

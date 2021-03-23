@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace Enhanced.ComponentModel
+namespace Enhanced.ComponentModel.Exceptions
 {
     [Serializable]
     public class RegistrationException : Exception
