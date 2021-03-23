@@ -15,7 +15,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Update="icon.png" Pack="true" PackagePath="icons" />
+        <None Include="..\..\images\icon.png" Pack="true" PackagePath="icons" />
     </ItemGroup>
 
     <ItemGroup>
