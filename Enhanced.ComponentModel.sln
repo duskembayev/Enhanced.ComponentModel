@@ -22,6 +22,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enhanced.ComponentModel.Ben
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enhanced.ComponentModel.CodeGeneration", "src\Enhanced.ComponentModel.CodeGeneration\Enhanced.ComponentModel.CodeGeneration.csproj", "{5B82F530-F93C-48C0-A885-2F44841FCECC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{15B27A43-E6ED-4CE8-805F-B6318994422A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfSample", "samples\WpfSample\WpfSample.csproj", "{805C30C7-1184-4C7B-AFD8-26F4863CC19B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,9 +44,16 @@ Global
 		{5B82F530-F93C-48C0-A885-2F44841FCECC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B82F530-F93C-48C0-A885-2F44841FCECC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B82F530-F93C-48C0-A885-2F44841FCECC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{805C30C7-1184-4C7B-AFD8-26F4863CC19B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{805C30C7-1184-4C7B-AFD8-26F4863CC19B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{805C30C7-1184-4C7B-AFD8-26F4863CC19B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{805C30C7-1184-4C7B-AFD8-26F4863CC19B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{805C30C7-1184-4C7B-AFD8-26F4863CC19B} = {15B27A43-E6ED-4CE8-805F-B6318994422A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {174F9E00-5BB7-4C44-B33C-23BB0C8E14EC}
