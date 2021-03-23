@@ -25,7 +25,7 @@ Intel Core i7-9700K CPU 3.60GHz (Coffee Lake), 1 CPU, 8 logical and 8 physical c
 
 ## How to use
 1. Install [package](https://www.nuget.org/packages/Enhanced.ComponentModel/)
-2. Inherit all necessary classes from `EnhancedObject` and mark them with `EnhanceAttribute` and 
+2. Inherit all necessary classes from `EnhancedObject` and mark them with `EnhanceAttribute` 
 ``` csharp
 [Enhance]
 public class MyViewModel : EnhancedObject
