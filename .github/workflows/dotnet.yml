@@ -9,7 +9,7 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-      PROJ_NAME: Enhanced.ComponentModel
+      PROJ_ID: Enhanced.ComponentModel
       PROJ_PATH: src\Enhanced.ComponentModel\Enhanced.ComponentModel.csproj
 
     steps:
@@ -33,7 +33,7 @@ jobs:
     - name: Pack
       run: dotnet pack $PROJ_PATH --no-build --include-symbols -o out -c release -p:version=${{ steps.bump_version.outputs.new_version }}
     - name: Push package
-      run: dotnet nuget push out\$PROJ_NAME.${{ steps.bump_version.outputs.new_version }}.nupkg -s nuget.org 
+      run: dotnet nuget push out/$PROJ_ID.${{ steps.bump_version.outputs.new_version }}.nupkg -s nuget.org 
     - name: Tag version
       id: tag_version
       uses: mathieudutour/github-tag-action@v5.3
