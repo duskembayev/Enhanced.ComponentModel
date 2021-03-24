@@ -1,4 +1,5 @@
-# Enhanced.ComponentModel [![Nuget](https://img.shields.io/nuget/v/Enhanced.ComponentModel?style=flat)](https://www.nuget.org/packages/Enhanced.ComponentModel/) [![Enhanced.ComponentModel on fuget.org](https://www.fuget.org/packages/Enhanced.ComponentModel/badge.svg)](https://www.fuget.org/packages/Enhanced.ComponentModel)
+# Enhanced.ComponentModel
+[![NuGet Badge](https://buildstats.info/nuget/enhanced.componentmodel)](https://www.nuget.org/packages/enhanced.componentmodel/)
 
 Provides [`ICustomTypeDescriptor`](https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.icustomtypedescriptor?view=net-5.0) implementation with improved performance based on code generation and expressions.
 
