@@ -26,7 +26,7 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore $PROJ_PATH
     - name: Build
       run: dotnet build $PROJ_PATH --no-restore -c release -p:version=${{ steps.bump_version.outputs.new_version }}
     - name: Pack
