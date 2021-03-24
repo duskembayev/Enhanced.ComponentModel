@@ -8,6 +8,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      PROJ_PATH: src\Enhanced.ComponentModel\Enhanced.ComponentModel.csproj
 
     steps:
     - uses: actions/checkout@v2      
@@ -26,9 +28,9 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore -c release -p:version=${{ steps.bump_version.outputs.new_version }}
+      run: dotnet build $PROJ_PATH --no-restore -c release -p:version=${{ steps.bump_version.outputs.new_version }}
     - name: Pack
-      run: dotnet pack --no-build --include-symbols -o out -c release -p:version=${{ steps.bump_version.outputs.new_version }}
+      run: dotnet pack $PROJ_PATH --no-build --include-symbols -o out -c release -p:version=${{ steps.bump_version.outputs.new_version }}
     - name: Push
       run: dotnet nuget push out\*${{ steps.bump_version.outputs.new_version }}.?nupkg -s nuget.org
     - name: Tag version
