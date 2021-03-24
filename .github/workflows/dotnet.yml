@@ -33,7 +33,9 @@ jobs:
     - name: Pack
       run: dotnet pack $PROJ_PATH --no-build --include-symbols -o out -c release -p:version=${{ steps.bump_version.outputs.new_version }}
     - name: Push package
-      run: dotnet nuget push out/$PROJ_ID.${{ steps.bump_version.outputs.new_version }}.nupkg -s nuget.org 
+      env:
+        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+      run: dotnet nuget push out/$PROJ_ID.${{ steps.bump_version.outputs.new_version }}.nupkg -s nuget.org -k $NUGET_API_KEY
     - name: Tag version
       id: tag_version
       uses: mathieudutour/github-tag-action@v5.3
