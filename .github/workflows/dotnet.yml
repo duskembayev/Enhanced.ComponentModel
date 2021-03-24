@@ -1,10 +1,6 @@
-name: .NET
+name: RELEASE
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]    
   workflow_dispatch:  
     branches: [ main ]    
 
@@ -15,13 +11,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2      
-    - name: Bump version and push tag
-      id: tag_version
+    - name: Bump version
+      id: bump_version
       uses: mathieudutour/github-tag-action@v5.3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         tag_prefix: release/v
-        create_annotated_tag: true
+        create_annotated_tag: false
         dry_run: true
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
@@ -30,9 +26,19 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore -c release -p:version=${{ steps.tag_version.outputs.new_version }}
+      run: dotnet build --no-restore -c release -p:version=${{ steps.bump_version.outputs.new_version }}
     - name: Pack
-      run: dotnet pack --no-build --include-symbols -o out -c release -p:version=${{ steps.tag_version.outputs.new_version }}
+      run: dotnet pack --no-build --include-symbols -o out -c release -p:version=${{ steps.bump_version.outputs.new_version }}
+    - name: Push
+      run: dotnet nuget push out\*${{ steps.bump_version.outputs.new_version }}.?nupkg -s nuget.org
+    - name: Tag version
+      id: tag_version
+      uses: mathieudutour/github-tag-action@v5.3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        tag_prefix: release/v
+        create_annotated_tag: true
+        dry_run: false
     - name: Create a GitHub release
       uses: actions/create-release@v1
       env:
