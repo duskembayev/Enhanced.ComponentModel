@@ -1,32 +1,43 @@
-﻿using System.ComponentModel;
-using Enhanced.ComponentModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using Enhanced.ComponentModel.Attributes;
 
 namespace WpfSample.Models
 {
     [Enhance]
-    public class MainViewModel : EnhancedObject, INotifyPropertyChanged
+    public class MainViewModel : Npc
     {
-        private static readonly PropertyChangedEventArgs ValueChangedEventArgs
-            = new PropertyChangedEventArgs(nameof(Value));
+        private static readonly PropertyChangedEventArgs ValueChangedEventArgs = new(nameof(ActualTickCount));
 
-        private int _value;
+        private readonly ObservableCollection<HistoryItemViewModel> _history;
+        private int _actualTickCount;
 
-        public int Value
+        public MainViewModel()
         {
-            get => _value;
+            _actualTickCount = 0;
+            _history = new ObservableCollection<HistoryItemViewModel>();
+        }
+
+        public int ActualTickCount
+        {
+            get => _actualTickCount;
             set
             {
-                _value = value;
+                _actualTickCount = value;
+
+                foreach (var itemViewModel in _history)
+                    itemViewModel.Recalculate(_actualTickCount);
+
+                _history.Add(new HistoryItemViewModel
+                {
+                    CreatedAt = _actualTickCount,
+                });
+
                 OnPropertyChanged(ValueChangedEventArgs);
             }
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged(PropertyChangedEventArgs args)
-        {
-            PropertyChanged?.Invoke(this, args);
-        }
+        public IReadOnlyCollection<HistoryItemViewModel> History => _history;
     }
 }

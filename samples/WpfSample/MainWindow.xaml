@@ -9,6 +9,25 @@
         d:DataContext="{d:DesignInstance {x:Type models:MainViewModel}}"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TextBlock Text="{Binding Value, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Pause" Click="OnPause" Margin="3" Width="50" />
+            <Button Content="Resume" Click="OnResume" Margin="3" Width="50" />
+        </StackPanel>
+
+        <TabControl Grid.Row="1">
+            <TabItem Header="TextBlock">
+                <TextBlock Text="{Binding ActualTickCount, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </TabItem>
+            <TabItem Header="DataGrid">
+                <DataGrid ItemsSource="{Binding History}">
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+        
     </Grid>
 </Window>

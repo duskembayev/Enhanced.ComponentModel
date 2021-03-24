@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Threading;
 using WpfSample.Models;
 
@@ -16,7 +17,7 @@ namespace WpfSample
             DataContext = _mainViewModel = new MainViewModel();
 
             _timer = new DispatcherTimer(
-                TimeSpan.FromMilliseconds(300),
+                TimeSpan.FromMilliseconds(80),
                 DispatcherPriority.Normal,
                 OnTimer,
                 Dispatcher);
@@ -30,7 +31,17 @@ namespace WpfSample
 
         private void OnTimer(object? sender, EventArgs e)
         {
-            _mainViewModel.Value = Environment.TickCount;
+            _mainViewModel.ActualTickCount = Environment.TickCount;
+        }
+
+        private void OnPause(object sender, RoutedEventArgs e)
+        {
+            _timer.Stop();
+        }
+
+        private void OnResume(object sender, RoutedEventArgs e)
+        {
+            _timer.Start();
         }
     }
 }
