@@ -32,7 +32,7 @@ jobs:
       run: dotnet build $PROJ_PATH --no-restore -c release -p:version=${{ steps.bump_version.outputs.new_version }}
     - name: Pack
       run: dotnet pack $PROJ_PATH --no-build --include-symbols -o out -c release -p:version=${{ steps.bump_version.outputs.new_version }}
-    - name: Push package
+    - name: Push
       env:
         NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
       run: dotnet nuget push out/$PROJ_ID.${{ steps.bump_version.outputs.new_version }}.nupkg -s nuget.org -k $NUGET_API_KEY
@@ -51,4 +51,4 @@ jobs:
       with:
         tag_name: ${{ steps.tag_version.outputs.new_tag }}
         release_name: Release ${{ steps.tag_version.outputs.new_version }}
-        body: ${{ steps.tag_version.outputs.changelog }}
+        artifact: out/$PROJ_ID.${{ steps.bump_version.outputs.new_version }}.nupkg
