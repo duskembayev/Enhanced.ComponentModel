@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PROJ_NAME: Enhanced.ComponentModel
-      PROJ_PATH: src\$PROJ_NAME\$PROJ_NAME.csproj
+      PROJ_PATH: src\Enhanced.ComponentModel\Enhanced.ComponentModel.csproj
 
     steps:
     - uses: actions/checkout@v2      
