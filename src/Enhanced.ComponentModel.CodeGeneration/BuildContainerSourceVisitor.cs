@@ -123,9 +123,14 @@ namespace Enhanced.ComponentModel.CodeGeneration
             return true;
         }
 
-        private static bool IsAccessible(ISymbol? methodSymbol)
+        private static bool IsAccessible(IMethodSymbol? symbol)
         {
-            return methodSymbol != null && methodSymbol.DeclaredAccessibility >= Accessibility.Internal;
+            return symbol != null && !symbol.IsInitOnly && IsAccessible((ISymbol) symbol);
+        }
+
+        private static bool IsAccessible(ISymbol? symbol)
+        {
+            return symbol != null && symbol.DeclaredAccessibility >= Accessibility.Internal;
         }
 
         private void AddError(DiagnosticDescriptor descriptor, ISymbol symbol)
