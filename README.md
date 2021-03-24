@@ -1,5 +1,5 @@
 # Enhanced.ComponentModel
-[![release](https://github.com/duskembayev/Enhanced.ComponentModel/actions/workflows/dotnet.yml/badge.svg)](https://github.com/duskembayev/Enhanced.ComponentModel/actions/workflows/dotnet.yml) [![NuGet Badge](https://buildstats.info/nuget/enhanced.componentmodel)](https://www.nuget.org/packages/enhanced.componentmodel/) 
+[![release](https://github.com/duskembayev/Enhanced.ComponentModel/actions/workflows/dotnet.yml/badge.svg)](https://github.com/duskembayev/Enhanced.ComponentModel/actions/workflows/dotnet.yml) [![NuGet version](https://badge.fury.io/nu/Enhanced.ComponentModel.svg)](https://nuget.org/packages/Enhanced.ComponentModel)
 
 Provides [`ICustomTypeDescriptor`](https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.icustomtypedescriptor?view=net-5.0) implementation with improved performance based on code generation and expressions.
 
