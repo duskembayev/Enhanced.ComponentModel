@@ -22,14 +22,16 @@ namespace Enhanced.ComponentModel.CodeGeneration
         private static readonly DiagnosticDescriptor GenericClassErrorDescriptor = new(
             "ENH1010",
             "Generic types are not supported",
-            "Type \"{0}\" is generic and not supported.", "Enhanced.ComponentModel",
+            "Type \"{0}\" is generic and not supported.",
+            "Enhanced.ComponentModel",
             DiagnosticSeverity.Error,
             true);
 
         private static readonly DiagnosticDescriptor AbstractClassErrorDescriptor = new(
             "ENH1011",
             "Abstract types are not supported",
-            "Type \"{0}\" is abstract and not supported.", "Enhanced.ComponentModel",
+            "Type \"{0}\" is abstract and not supported.",
+            "Enhanced.ComponentModel",
             DiagnosticSeverity.Error,
             true);
 

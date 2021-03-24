@@ -1,6 +1,5 @@
 using System;
 using System.Reflection;
-using System.Runtime.Loader;
 using Enhanced.ComponentModel.Attributes;
 using Enhanced.ComponentModel.Exceptions;
 
@@ -8,7 +7,8 @@ namespace Enhanced.ComponentModel
 {
     public static class RegistrationExtensions
     {
-        public static T RegisterAssemblyLoadContext<T>(this T @this, AssemblyLoadContext assemblyLoadContext)
+#if NET
+        public static T RegisterAssemblyLoadContext<T>(this T @this, global::System.Runtime.Loader.AssemblyLoadContext assemblyLoadContext)
             where T : IEnhancedTypeDescriptionProviderRegistry
         {
             if (@this == null) throw new ArgumentNullException(nameof(@this));
@@ -21,8 +21,9 @@ namespace Enhanced.ComponentModel
         public static T RegisterDefaultAssemblyLoadContext<T>(this T @this)
             where T : IEnhancedTypeDescriptionProviderRegistry
         {
-            return @this.RegisterAssemblyLoadContext(AssemblyLoadContext.Default);
+            return @this.RegisterAssemblyLoadContext(global::System.Runtime.Loader.AssemblyLoadContext.Default);
         }
+#endif
 
         public static T RegisterAssembly<T>(this T @this, Assembly assembly)
             where T : IEnhancedTypeDescriptionProviderRegistry

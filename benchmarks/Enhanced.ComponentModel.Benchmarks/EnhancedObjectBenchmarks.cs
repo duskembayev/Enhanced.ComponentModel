@@ -113,13 +113,13 @@ namespace Enhanced.ComponentModel.Benchmarks
 
         private class SampleRegularObject
         {
-            public string StrValue { get; set; }
+            public string StrValue { get; set; } = string.Empty;
             public int IntValue { get; set; }
         }
 
         private class SampleEnhancedObject : EnhancedObject
         {
-            public string StrValue { get; set; }
+            public string StrValue { get; set; } = string.Empty;
             public int IntValue { get; set; }
         }
 
